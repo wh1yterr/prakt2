@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask import render_template, redirect, url_for
 from models import db, Registration
 import config
 from flask_cors import CORS
@@ -46,6 +47,18 @@ def all_regs():
         'phone': r.phone,
         'approved': r.approved
     } for r in regs])
+
+@app.route('/admin')
+def admin():
+    regs = Registration.query.all()
+    return render_template('admin.html', registrations=regs)
+
+@app.route('/approve/<int:reg_id>')
+def approve(reg_id):
+    reg = Registration.query.get_or_404(reg_id)
+    reg.approved = True
+    db.session.commit()
+    return redirect(url_for('admin'))
 
 if __name__ == '__main__':
     app.run(debug=True)

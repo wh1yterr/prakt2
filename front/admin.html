@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Админка</title>
+</head>
+<body>
+    <h1>Заявки</h1>
+    {% for r in registrations %}
+        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
+            <p><strong>Компания:</strong> {{ r.company_name }}</p>
+            <p><strong>Контакт:</strong> {{ r.contact_name }}</p>
+            <p><strong>Email:</strong> {{ r.email }}</p>
+            <p><strong>Телефон:</strong> {{ r.phone }}</p>
+            <p><strong>Одобрено:</strong> {{ r.approved }}</p>
+            {% if not r.approved %}
+                <a href="{{ url_for('approve', reg_id=r.id) }}">✅ Одобрить</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
