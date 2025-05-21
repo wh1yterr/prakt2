@@ -8,7 +8,7 @@ document.getElementById('regForm').addEventListener('submit', async (e) => {
     phone: document.getElementById('phone').value
   };
 
-  await fetch('https://prakt2.onrender.com/.onrender.com/register', {
+  await fetch('https://prakt2.onrender.com/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
