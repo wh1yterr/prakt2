@@ -1,80 +1,10 @@
 body {
-    background: #f1f1f7;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+  font-family: sans-serif;
+  padding: 20px;
 }
 
-.container {
-    background: #fff;
-    max-width: 400px;
-    margin: 40px auto 0 auto;
-    padding: 32px 24px 24px 24px;
-    border-radius: 14px;
-    box-shadow: 0 4px 20px 0 rgba(0,0,0,0.07);
-}
-
-h1 {
-    color: #3a3a54;
-    margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 1.7em;
-    text-align: center;
-}
-
-p {
-    color: #535380;
-    font-size: 1em;
-    margin-bottom: 24px;
-    text-align: center;
-}
-
-form label {
-    display: block;
-    margin-bottom: 6px;
-    color: #252545;
-    font-size: 1em;
-    font-weight: 500;
-}
-
-form input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 18px;
-    border: 1px solid #d1d1e0;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 1em;
-    background: #fafaff;
-    transition: border 0.2s;
-}
-
-form input:focus {
-    border: 1.5px solid #7b52f7;
-    outline: none;
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background: #7b52f7;
-    color: #fff;
-    font-size: 1.08em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
-}
-
-button[type="submit"]:hover {
-    background: #5a38b5;
-}
-
-#message {
-    margin-top: 16px;
-    font-size: 1em;
-    text-align: center;
-    color: #388e3c;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
