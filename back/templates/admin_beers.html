@@ -3,18 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Управление ассортиментом пива</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">    
 </head>
 <body>
-  <header>
-    <h1>Управление ассортиментом пива</h1>
-    <nav>
-      <a href="index.html">Главная</a>
-      <a href="products.html">Товары</a>
-      <a href="admin_beers.html" class="active">Администрирование</a>
-    </nav>
-  </header>
-
   <main>
     <section>
       <h2>Добавить новое пиво</h2>
