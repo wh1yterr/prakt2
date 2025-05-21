@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Профиль</title>
+</head>
+<body>
+  <h1>Профиль пользователя</h1>
+  <div id="profile"></div>
+  <button id="logoutBtn">Выйти</button>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user) {
+      // Если не залогинен — переходим на страницу логина
+      window.location.href = 'login.html';
+    } else {
+      const profileDiv = document.getElementById('profile');
+      profileDiv.innerHTML = `
+        <p><strong>Компания:</strong> ${user.company_name}</p>
+        <p><strong>Контактное лицо:</strong> ${user.contact_name}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+      `;
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('user');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
