@@ -1,3 +1,4 @@
+/* Цветовые и визуальные переменные */
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #3498db;
@@ -5,105 +6,58 @@
   --text-light: #777;
   --border-radius: 8px;
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --transition: 0.3s ease;
+  --transition: all 0.3s ease;
 }
 
-form {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: white;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+/* Общие стили */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-  text-align: center;
-  color: var(--primary-color);
-  margin: 2rem 0 1rem;
-  font-size: 2rem;
-}
-
-input {
-  width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  transition: var(--transition);
-}
-
-input:focus {
-  outline: none;
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-
-button[type="submit"] {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: var(--secondary-color);
+header {
+  background-color: var(--primary-color);
   color: white;
-  border: none;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-button[type="submit"]:hover {
-  background-color: #2980b9;
-}
-
-/* Дополнительные ссылки под формой */
-.form-footer {
+  padding: 1rem;
   text-align: center;
-  margin-top: 1rem;
-  color: var(--text-light);
 }
 
-.form-footer a {
-  color: var(--secondary-color);
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: white;
+  margin: 0 1rem;
   text-decoration: none;
   transition: var(--transition);
 }
 
-.form-footer a:hover {
+nav a:hover,
+nav a.active {
   text-decoration: underline;
 }
 
-/* Сообщения об ошибках */
-.error-message {
-  color: var(--accent-color);
-  margin-bottom: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-/* Адаптивность для формы */
-@media (max-width: 480px) {
-  form {
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  h1 {
-    font-size: 1.5rem;
-  }
-}
-
-/* Добавьте это в style.css */
-
+/* Основной контейнер */
 .auth-container {
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 3rem auto;
   padding: 2rem;
   background-color: white;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 }
 
+/* Заголовок */
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+/* Группы полей */
 .form-group {
   position: relative;
   margin-bottom: 1.5rem;
@@ -118,37 +72,93 @@ button[type="submit"]:hover {
   transition: var(--transition);
 }
 
+.form-group input:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
 .form-group label {
   position: absolute;
   left: 1rem;
   top: 1rem;
   color: var(--text-light);
+  background-color: white;
+  padding: 0 0.3rem;
   transition: var(--transition);
   pointer-events: none;
 }
 
 .form-group input:focus + label,
 .form-group input:not(:placeholder-shown) + label {
-  top: -0.5rem;
+  top: -0.6rem;
   left: 0.8rem;
   font-size: 0.8rem;
-  background: white;
-  padding: 0 0.2rem;
   color: var(--secondary-color);
 }
 
+/* Кнопка */
+button[type="submit"],
 .btn-primary {
   background-color: var(--secondary-color);
-  width: 100%;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
   padding: 1rem;
-  margin-top: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
+button[type="submit"]:hover,
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+/* Подписи и ссылки */
+.form-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.form-footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Ошибка */
 .error-message {
+  background: #fde8e8;
   color: var(--accent-color);
   padding: 0.5rem;
-  margin-bottom: 1rem;
   text-align: center;
-  background: #fde8e8;
   border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+}
+
+/* Подвал */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
 }
