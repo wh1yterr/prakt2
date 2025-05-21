@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">    
     <meta charset="UTF-8">
     <title>Админка</title>
 </head>
 <body>
     <h1>Заявки</h1>
     {% for r in registrations %}
-        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
+        <div class="card">
             <p><strong>Компания:</strong> {{ r.company_name }}</p>
             <p><strong>Контакт:</strong> {{ r.contact_name }}</p>
             <p><strong>Email:</strong> {{ r.email }}</p>
