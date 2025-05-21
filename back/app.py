@@ -3,6 +3,8 @@ from flask import render_template, redirect, url_for
 from models import db, Registration
 import config
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -21,6 +23,12 @@ def register():
     required_fields = ['company_name', 'contact_name', 'email', 'phone']
     if not data or not all(field in data and data[field].strip() for field in required_fields):
         return jsonify({'error': 'Пожалуйста, заполните все обязательные поля.'}), 400
+    
+    password = data.get('password')
+    if not password or len(password) < 6:
+        return jsonify({'error': 'Пароль должен быть не менее 6 символов.'}), 400
+    
+        hashed_password = generate_password_hash(password)
 
     # Сохранение в БД
     reg = Registration(
@@ -28,6 +36,7 @@ def register():
         contact_name=data['contact_name'],
         email=data['email'],
         phone=data['phone'],
+        password=hashed_password,
         approved=False
     )
     db.session.add(reg)
@@ -62,3 +71,25 @@ def approve(reg_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Введите email и пароль'}), 400
+
+    user = Registration.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'Пользователь не найден'}), 404
+
+    if not user.approved:
+        return jsonify({'error': 'Аккаунт не подтвержден администратором'}), 403
+
+    if not check_password_hash(user.password, password):
+        return jsonify({'error': 'Неверный пароль'}), 401
+
+    # Можно создать сессию или токен (зависит от задачи)
+    return jsonify({'message': 'Успешный вход', 'user': {'company_name': user.company_name, 'contact_name': user.contact_name, 'email': user.email}}), 200
