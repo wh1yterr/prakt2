@@ -11,5 +11,14 @@ class Registration(db.Model):
     password = db.Column(db.String(128), nullable=False)  # новое поле для пароля (хешируем!)
     approved = db.Column(db.Boolean, default=False)
 
+class Beer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    style = db.Column(db.String(50), nullable=False)
+    abv = db.Column(db.Float, nullable=False)  # Крепость
+    volume = db.Column(db.String(20), nullable=False)  # Объём, например, "0.5 л"
+
+
 
 

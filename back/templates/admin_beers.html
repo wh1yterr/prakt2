@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Управление ассортиментом пива</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Управление ассортиментом пива</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Товары</a>
+      <a href="admin_beers.html" class="active">Администрирование</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Добавить новое пиво</h2>
+      <form id="addBeerForm">
+        <input type="text" id="name" placeholder="Название" required />
+        <input type="text" id="style" placeholder="Сорт" required />
+        <input type="number" step="0.1" id="abv" placeholder="Крепость (%)" required />
+        <input type="text" id="volume" placeholder="Объём (л)" required />
+        <textarea id="description" placeholder="Описание" required></textarea>
+        <button type="submit">Добавить</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Существующие сорта</h2>
+      <ul id="beerList"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Все права защищены.</p>
+  </footer>
+
+  <script>
+    // Загрузка списка пива
+    async function loadBeers() {
+      const response = await fetch('/api/beers');
+      const beers = await response.json();
+      const beerList = document.getElementById('beerList');
+      beerList.innerHTML = '';
+      beers.forEach(beer => {
+        const li = document.createElement('li');
+        li.textContent = `${beer.name} (${beer.style}, ${beer.abv}%, ${beer.volume})`;
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Удалить';
+        deleteBtn.onclick = async () => {
+          await fetch(`/api/beers/${beer.id}`, { method: 'DELETE' });
+          loadBeers();
+        };
+        li.appendChild(deleteBtn);
+        beerList.appendChild(li);
+      });
+    }
+
+    document.getElementById('addBeerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value,
+        style: document.getElementById('style').value,
+        abv: parseFloat(document.getElementById('abv').value),
+        volume: document.getElementById('volume').value,
+        description: document.getElementById('description').value
+      };
+      await fetch('/api/beers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      e.target.reset();
+      loadBeers();
+    });
+
+    loadBeers();
+  </script>
+</body>
+</html>
