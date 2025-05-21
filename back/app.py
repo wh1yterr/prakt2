@@ -95,40 +95,54 @@ def login():
     return jsonify({'message': 'Успешный вход', 'user': {'company_name': user.company_name, 'contact_name': user.contact_name, 'email': user.email}}), 200
 
 
+# Получить всё пиво
 @app.route('/api/beers', methods=['GET'])
 def get_beers():
     beers = Beer.query.all()
-    return jsonify([{
-        'id': b.id,
-        'name': b.name,
-        'description': b.description,
-        'style': b.style,
-        'abv': b.abv,
-        'volume': b.volume
-    } for b in beers])
+    return jsonify([
+        {
+            'id': b.id,
+            'name': b.name,
+            'description': b.description,
+            'style': b.style,
+            'abv': b.abv,
+            'volume': b.volume
+        } for b in beers
+    ])
 
-@app.route('/add_beer', methods=['GET', 'POST'])
+# Добавить пиво
+@app.route('/api/beers', methods=['POST'])
 def add_beer():
-    if request.method == 'POST':
-        name = request.form['name']
-        description = request.form['description']
-        style = request.form['style']
-        abv = request.form['abv']
-        volume = request.form['volume']
-        new_beer = Beer(name=name, description=description, style=style, abv=abv, volume=volume)
-        db.session.add(new_beer)
-        db.session.commit()
-        return redirect('/add_beer')
-    
-    return '''
-        <h1>Добавить пиво</h1>
-        <form method="POST">
-            <input type="text" name="name" placeholder="Название" required><br>
-            <textarea name="description" placeholder="Описание" required></textarea><br>
-            <input type="text" name="style" placeholder="Сорт" required><br>
-            <input type="number" step="0.1" name="abv" placeholder="Крепость (%)" required><br>
-            <input type="text" name="volume" placeholder="Объём" required><br>
-            <button type="submit">Сохранить</button>
-        </form>
-    '''
+    data = request.get_json()
+    beer = Beer(
+        name=data['name'],
+        description=data.get('description', ''),
+        style=data.get('style'),
+        abv=float(data.get('abv', 0)),
+        volume=float(data.get('volume', 0))
+    )
+    db.session.add(beer)
+    db.session.commit()
+    return jsonify({'message': 'Пиво добавлено'}), 201
+
+# Изменить пиво
+@app.route('/api/beers/<int:beer_id>', methods=['PUT'])
+def update_beer(beer_id):
+    data = request.get_json()
+    beer = Beer.query.get_or_404(beer_id)
+    beer.name = data['name']
+    beer.description = data['description']
+    beer.style = data['style']
+    beer.abv = float(data['abv'])
+    beer.volume = float(data['volume'])
+    db.session.commit()
+    return jsonify({'message': 'Пиво обновлено'})
+
+# Удалить пиво
+@app.route('/api/beers/<int:beer_id>', methods=['DELETE'])
+def delete_beer(beer_id):
+    beer = Beer.query.get_or_404(beer_id)
+    db.session.delete(beer)
+    db.session.commit()
+    return jsonify({'message': 'Пиво удалено'})
 

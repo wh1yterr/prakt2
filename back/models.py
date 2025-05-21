@@ -14,10 +14,10 @@ class Registration(db.Model):
 class Beer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    style = db.Column(db.String(50), nullable=False)
-    abv = db.Column(db.Float, nullable=False)  # Крепость
-    volume = db.Column(db.String(20), nullable=False)  # Объём, например, "0.5 л"
+    description = db.Column(db.Text)
+    style = db.Column(db.String(50))
+    abv = db.Column(db.Float)  # Крепость
+    volume = db.Column(db.Float)  # Объем (например, 0.5)
 
 
 

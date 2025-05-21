@@ -14,6 +14,19 @@
     <input type="text" name="volume" placeholder="Объём (например, 0.5 л)" required><br>
     <button type="submit">Сохранить</button>
   </form>
+<form id="beer-form">
+  <input type="text" id="name" placeholder="Название" required />
+  <input type="text" id="description" placeholder="Описание" />
+  <input type="text" id="style" placeholder="Сорт" />
+  <input type="number" id="abv" step="0.1" placeholder="Крепость (%)" />
+  <input type="number" id="volume" step="0.1" placeholder="Объём (л)" />
+  <button type="submit">Добавить / Обновить</button>
+</form>
+
+<div id="beer-list"></div>
+
+<script src="admin_beer.js"></script>
+
   <a href="/beers">Перейти к списку пива</a>
 </body>
 </html>
