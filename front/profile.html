@@ -2,32 +2,59 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Профиль</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Профиль пользователя | B2B-платформа</title>
+  <link rel="stylesheet" href="profile_style.css" />
 </head>
 <body>
-  <h1>Профиль пользователя</h1>
-  <div id="profile"></div>
-  <button id="logoutBtn">Выйти</button>
+  <header>
+    <h1>B2B-платформа</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="profile.html" class="active">профиль</a>
+      <a href="#" id="navLogout">выйти</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="profile-container">
+      <div class="profile-header">
+        <h1>Профиль компании</h1>
+        <button id="logoutBtn" class="btn">Выйти из системы</button>
+      </div>
+      
+      <div id="profile" class="profile-info"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 B2B-платформа. Все права защищены.</p>
+  </footer>
 
   <script>
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (!user) {
-      // Если не залогинен — переходим на страницу логина
       window.location.href = 'login.html';
     } else {
       const profileDiv = document.getElementById('profile');
       profileDiv.innerHTML = `
-        <p><strong>Компания:</strong> ${user.company_name}</p>
-        <p><strong>Контактное лицо:</strong> ${user.contact_name}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Компания:</strong> ${user.company_name || 'Не указано'}</p>
+        <p><strong>Контактное лицо:</strong> ${user.contact_name || 'Не указано'}</p>
+        <p><strong>Email:</strong> ${user.email || 'Не указано'}</p>
+        <p><strong>Телефон:</strong> ${user.phone || 'Не указано'}</p>
+        <p><strong>Дата регистрации:</strong> ${new Date(user.created_at).toLocaleDateString() || 'Неизвестно'}</p>
       `;
     }
 
-    document.getElementById('logoutBtn').addEventListener('click', () => {
+    function logout() {
       localStorage.removeItem('user');
       window.location.href = 'login.html';
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+    document.getElementById('navLogout').addEventListener('click', (e) => {
+      e.preventDefault();
+      logout();
     });
   </script>
 </body>

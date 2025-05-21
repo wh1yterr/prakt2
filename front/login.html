@@ -3,15 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <title>Вход в аккаунт</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login_style.css" />
 </head>
 <body>
-  <h1>Вход</h1>
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Пароль" required />
-    <button type="submit">Войти</button>
-  </form>
+  <header>
+    <h1>B2B-платформа</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="register.html">Регистрация</a>
+      <a href="login.html">Вход</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Вход в систему</h1>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Пароль" required />
+      <button type="submit">Войти</button>
+      <div class="form-footer">
+        Нет аккаунта? <a href="register.html">Зарегистрируйтесь</a>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 B2B-платформа. Все права защищены.</p>
+  </footer>
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -32,12 +50,19 @@
         const result = await response.json();
 
         if (response.ok) {
-          // Сохраняем данные в localStorage
           localStorage.setItem('user', JSON.stringify(result.user));
-          // Переходим на страницу профиля
           window.location.href = 'profile.html';
         } else {
-          alert(result.error);
+          // Показываем ошибку над формой
+          const errorElement = document.createElement('div');
+          errorElement.className = 'error-message';
+          errorElement.textContent = result.error || 'Ошибка входа';
+          const form = document.getElementById('loginForm');
+          if (form.firstElementChild.className === 'error-message') {
+            form.replaceChild(errorElement, form.firstElementChild);
+          } else {
+            form.insertBefore(errorElement, form.firstElementChild);
+          }
         }
       } catch (error) {
         alert('Ошибка сети');
