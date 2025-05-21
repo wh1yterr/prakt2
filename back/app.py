@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
+from models import db, Registration
+import config
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # разрешает запросы с других источников, удобно для локальной разработки
+app.config.from_object(config)
+CORS(app)
 
-# Список для хранения заявок (в реальном проекте замени на базу данных)
-pending_registrations = []
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/register', methods=['POST'])
 def register():

@@ -1,43 +1,18 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('registrationForm');
-    const messageDiv = document.getElementById('message');
+document.getElementById('regForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    form.addEventListener('submit', async function (e) {
-        e.preventDefault();
+  const data = {
+    company_name: document.getElementById('company').value,
+    contact_name: document.getElementById('contact').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value
+  };
 
-        // Собираем данные формы
-        const formData = {
-            org: form.org.value.trim(),
-            fio: form.fio.value.trim(),
-            phone: form.phone.value.trim(),
-            email: form.email.value.trim()
-        };
+  await fetch('https://your-backend-url.onrender.com/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
 
-        // Очищаем сообщение
-        messageDiv.textContent = '';
-
-        try {
-            // Отправка данных на backend
-            const response = await fetch('/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                form.reset();
-                messageDiv.style.color = "#388e3c";
-                messageDiv.textContent = 'Заявка успешно отправлена! Ожидайте подтверждения.';
-            } else {
-                const data = await response.json();
-                messageDiv.style.color = "#c0392b";
-                messageDiv.textContent = data.error || 'Произошла ошибка при отправке. Попробуйте позже.';
-            }
-        } catch (error) {
-            messageDiv.style.color = "#c0392b";
-            messageDiv.textContent = 'Ошибка соединения с сервером.';
-        }
-    });
+  alert('Заявка отправлена!');
 });
