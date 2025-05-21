@@ -99,32 +99,36 @@ def login():
 def get_beers():
     beers = Beer.query.all()
     return jsonify([{
-        'id': beer.id,
-        'name': beer.name,
-        'description': beer.description,
-        'style': beer.style,
-        'abv': beer.abv,
-        'volume': beer.volume
-    } for beer in beers])
+        'id': b.id,
+        'name': b.name,
+        'description': b.description,
+        'style': b.style,
+        'abv': b.abv,
+        'volume': b.volume
+    } for b in beers])
 
-@app.route('/api/beers', methods=['POST'])
+@app.route('/add_beer', methods=['GET', 'POST'])
 def add_beer():
-    data = request.get_json()
-    new_beer = Beer(
-        name=data['name'],
-        description=data['description'],
-        style=data['style'],
-        abv=data['abv'],
-        volume=data['volume']
-    )
-    db.session.add(new_beer)
-    db.session.commit()
-    return jsonify({'message': 'Пиво добавлено успешно'}), 201
-
-@app.route('/api/beers/<int:beer_id>', methods=['DELETE'])
-def delete_beer(beer_id):
-    beer = Beer.query.get_or_404(beer_id)
-    db.session.delete(beer)
-    db.session.commit()
-    return jsonify({'message': 'Пиво удалено успешно'})
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        style = request.form['style']
+        abv = request.form['abv']
+        volume = request.form['volume']
+        new_beer = Beer(name=name, description=description, style=style, abv=abv, volume=volume)
+        db.session.add(new_beer)
+        db.session.commit()
+        return redirect('/add_beer')
+    
+    return '''
+        <h1>Добавить пиво</h1>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Название" required><br>
+            <textarea name="description" placeholder="Описание" required></textarea><br>
+            <input type="text" name="style" placeholder="Сорт" required><br>
+            <input type="number" step="0.1" name="abv" placeholder="Крепость (%)" required><br>
+            <input type="text" name="volume" placeholder="Объём" required><br>
+            <button type="submit">Сохранить</button>
+        </form>
+    '''
 
