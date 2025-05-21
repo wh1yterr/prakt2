@@ -162,3 +162,42 @@ footer {
     font-size: 1.5rem;
   }
 }
+
+
+.welcome {
+  max-width: 600px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.welcome h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.welcome p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Общая кнопка */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--secondary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
