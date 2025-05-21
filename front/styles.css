@@ -1,10 +1,74 @@
+/* style.css */
+
 body {
-  font-family: sans-serif;
-  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-form {
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+form#regForm {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 320px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px;
+}
+
+form#regForm input {
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+form#regForm input:focus {
+  border-color: #74ebd5;
+  box-shadow: 0 0 8px rgba(116, 235, 213, 0.6);
+}
+
+form#regForm button {
+  padding: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background: #74ebd5;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(116, 235, 213, 0.6);
+}
+
+form#regForm button:hover {
+  background: #52c7b8;
+  box-shadow: 0 6px 14px rgba(82, 199, 184, 0.8);
+}
+
+form#regForm button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 400px) {
+  form#regForm {
+    width: 90%;
+    padding: 20px;
+  }
 }
