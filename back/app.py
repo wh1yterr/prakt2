@@ -95,6 +95,10 @@ def login():
     return jsonify({'message': 'Успешный вход', 'user': {'company_name': user.company_name, 'contact_name': user.contact_name, 'email': user.email}}), 200
 
 
+@app.route('/add_beer')
+def add_beer_page():
+    return render_template('add_beer.html')
+
 # Получить всё пиво
 @app.route('/api/beers', methods=['GET'])
 def get_beers():

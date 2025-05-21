@@ -1,5 +1,5 @@
 async function loadBeers() {
-  const res = await fetch("https://your-backend-url/api/beers");
+  const res = await fetch("https://prakt2.onrender.com/api/beers");
   const beers = await res.json();
   const list = document.getElementById("beer-list");
   list.innerHTML = "";
@@ -28,8 +28,8 @@ document.getElementById("beer-form").addEventListener("submit", async (e) => {
 
   const method = window.editingBeerId ? "PUT" : "POST";
   const url = window.editingBeerId
-    ? `https://your-backend-url/api/beers/${window.editingBeerId}`
-    : "https://your-backend-url/api/beers";
+    ? `https://prakt2.onrender.com/api/beers/${window.editingBeerId}`
+    : "https://prakt2.onrender.com/api/beers";
 
   await fetch(url, {
     method,
@@ -43,7 +43,7 @@ document.getElementById("beer-form").addEventListener("submit", async (e) => {
 });
 
 async function editBeer(id) {
-  const res = await fetch(`https://your-backend-url/api/beers/${id}`);
+  const res = await fetch(`https://prakt2.onrender.com/api/beers/${id}`);
   const beer = await res.json();
   document.getElementById("name").value = beer.name;
   document.getElementById("description").value = beer.description;
@@ -55,7 +55,7 @@ async function editBeer(id) {
 
 async function deleteBeer(id) {
   if (confirm("Удалить пиво?")) {
-    await fetch(`https://your-backend-url/api/beers/${id}`, { method: "DELETE" });
+    await fetch(`https://prakt2.onrender.com/api/beers/${id}`, { method: "DELETE" });
     loadBeers();
   }
 }
