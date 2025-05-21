@@ -20,15 +20,15 @@ def register():
     data = request.get_json()
 
     # Проверка на заполненность
-    required_fields = ['company_name', 'contact_name', 'email', 'phone']
+    required_fields = ['company_name', 'contact_name', 'email', 'phone', 'password']
     if not data or not all(field in data and data[field].strip() for field in required_fields):
         return jsonify({'error': 'Пожалуйста, заполните все обязательные поля.'}), 400
-    
+
     password = data.get('password')
     if not password or len(password) < 6:
         return jsonify({'error': 'Пароль должен быть не менее 6 символов.'}), 400
-    
-        hashed_password = generate_password_hash(password)
+
+    hashed_password = generate_password_hash(password)  # вот здесь убран лишний отступ
 
     # Сохранение в БД
     reg = Registration(
