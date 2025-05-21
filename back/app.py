@@ -31,5 +31,17 @@ def register():
 
     return jsonify({'message': 'Заявка успешно отправлена!'}), 200
 
+@app.route('/all')
+def all_regs():
+    regs = Registration.query.all()
+    return jsonify([{
+        'id': r.id,
+        'company': r.company_name,
+        'contact': r.contact_name,
+        'email': r.email,
+        'phone': r.phone,
+        'approved': r.approved
+    } for r in regs])
+
 if __name__ == '__main__':
     app.run(debug=True)
