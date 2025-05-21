@@ -1,6 +1,4 @@
-/* Дополнения к существующему style.css */
 
-/* Общие стили для форм */
 form {
   max-width: 400px;
   margin: 2rem auto;
@@ -84,4 +82,64 @@ button[type="submit"]:hover {
   h1 {
     font-size: 1.5rem;
   }
+}
+
+/* Добавьте это в style.css */
+
+.auth-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: var(--text-light);
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  background: white;
+  padding: 0 0.2rem;
+  color: var(--secondary-color);
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: var(--accent-color);
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: #fde8e8;
+  border-radius: var(--border-radius);
 }
