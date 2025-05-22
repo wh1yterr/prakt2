@@ -17,8 +17,8 @@ body, html {
 .form {
   width: 100%;
   max-width: 400px; /* нормальная ширина */
-  margin-top: -450px;
-  padding: 30px;
+  margin-top: -250px;
+  padding: 40px;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -119,8 +119,8 @@ body, html {
   gap: 10px;
   max-width: 350px;
   background-color: #fff;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 40px;
+  border-radius: 30px;
   position: relative;
 }
 
