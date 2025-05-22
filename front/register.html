@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Регистрация</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="regcont.css" />
 </head>
 <body>
   <header>
@@ -16,6 +17,8 @@
       <a href="login.html">Вход</a>
   </nav>
 </header>
+<!---->
+<!--
   <h1>Регистрация</h1>
   <form id="regForm">
     <input type="text" id="company" placeholder="Название компании" required />
@@ -28,6 +31,42 @@
   <div class="form-footer">
           <p>Уже есть аккаунт? <a href="login.html"> Авторизируйтесь</a></p>
   </div>
+  -->
+<main class="center-wrapper">
+  <form class="form" id="regForm">
+    <p class="title">Регистрация</p>
+    <p class="message">Зарегистрируйтесь, чтобы получить доступ к платформе</p>
+
+    <label>
+      <input required type="text" id="company" name="company" class="input" placeholder="">
+      <span>Название компании</span>
+    </label>
+
+    <label>
+      <input required type="text" id="contact" name="contact" class="input" placeholder="">
+      <span>Контактное лицо</span>
+    </label>
+
+    <label>
+      <input required type="email" id="email" name="email" class="input" placeholder="">
+      <span>Email</span>
+    </label>
+
+    <label>
+      <input required type="tel" id="phone" name="phone" class="input" placeholder="">
+      <span>Телефон</span>
+    </label>
+
+    <label>
+      <input required type="password" id="password" name="password" class="input" placeholder="">
+      <span>Пароль</span>
+    </label>
+
+    <button type="submit" class="submit">Зарегистрироваться</button>
+</main>
+    <p class="signin">Уже есть аккаунт? <a href="login.html">Войти</a></p>
+  </form>
+
   <script src="script.js"></script>
 </body>
 </html>
