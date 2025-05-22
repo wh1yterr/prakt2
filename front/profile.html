@@ -6,34 +6,33 @@
   <title>Профиль пользователя</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="profile_style.css" />
-
 </head>
 <body>
-  <div class ="container">
-  <header>
-    <nav>
-      <a href="index.html">Главная</a>
-      <a href="products.html" class="active">Товары</a>
-      <a href="profile.html">Профиль</a>
-      <a href="register.html" class="active">Регистрация</a>
-      <a href="login.html">Вход</a>
-    </nav>
-  </header>
+  <div class="container">
+    <header>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="products.html" class="active">Товары</a>
+        <a href="profile.html">Профиль</a>
+        <a href="register.html" id="registerLink">Регистрация</a>
+        <a href="login.html" id="loginLink">Вход</a>
+      </nav>
+    </header>
 
-  <main>
-    <div class="profile-container">
-      <div class="profile-header">
-        <h1>Профиль компании</h1>
-        <button id="logoutBtn" class="btn">Выйти из системы</button>
+    <main>
+      <div class="profile-container">
+        <div class="profile-header">
+          <h1>Профиль компании</h1>
+          <button id="logoutBtn" class="btn">Выйти из системы</button>
+        </div>
+        <div id="profile" class="profile-info"></div>
       </div>
-      
-      <div id="profile" class="profile-info"></div>
-    </div>
-  </main>
+    </main>
 
-  <footer>
-    <p>© 2025 B2B-платформа. Все права защищены.</p>
-  </footer>
+    <footer>
+      <p>© 2025 B2B-платформа. Все права защищены.</p>
+    </footer>
+  </div>
 
   <script>
     const user = JSON.parse(localStorage.getItem('user'));
@@ -49,6 +48,12 @@
         <p><strong>Телефон:</strong> ${user.phone || 'Не указано'}</p>
         <p><strong>Дата регистрации:</strong> ${new Date(user.created_at).toLocaleDateString() || 'Неизвестно'}</p>
       `;
+
+      // Скрываем ссылки "Регистрация" и "Вход"
+      const loginLink = document.getElementById('loginLink');
+      const registerLink = document.getElementById('registerLink');
+      if (loginLink) loginLink.style.display = 'none';
+      if (registerLink) registerLink.style.display = 'none';
     }
 
     function logout() {
@@ -56,33 +61,8 @@
       window.location.href = 'login.html';
     }
 
-    document.getElementById('logoutBtn').addEventListener('click', logout);
-    document.getElementById('navLogout').addEventListener('click', (e) => {
-      e.preventDefault();
-      logout();
-    });
-  </script>
-  </div>
-  <script>
-    const user = JSON.parse(localStorage.getItem('user'));
-
-if (!user) {
-  window.location.href = 'login.html';
-} else {
-  const profileDiv = document.getElementById('profile');
-  profileDiv.innerHTML = `
-    <p><strong>Компания:</strong> ${user.company_name || 'Не указано'}</p>
-    <p><strong>Контактное лицо:</strong> ${user.contact_name || 'Не указано'}</p>
-    <p><strong>Email:</strong> ${user.email || 'Не указано'}</p>
-    <p><strong>Телефон:</strong> ${user.phone || 'Не указано'}</p>
-    <p><strong>Дата регистрации:</strong> ${new Date(user.created_at).toLocaleDateString() || 'Неизвестно'}</p>
-  `;
-
-  // Скрываем ссылки "Вход" и "Регистрация"
-  document.getElementById('loginLink')?.remove();
-  document.getElementById('registerLink')?.remove();
-}
-
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
   </script>
 </body>
 </html>
