@@ -42,7 +42,7 @@ def register():
     db.session.add(reg)
     db.session.commit()
 
-    return jsonify({'message': 'Заявка успешно сохранена!'}), 200
+    return jsonify({'message': 'Ожидайте ответа от администратора!'}), 200
 
 
 @app.route('/all')
