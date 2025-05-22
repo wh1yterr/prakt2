@@ -30,7 +30,7 @@
 }
 
 .card::after {
-  content: "Add to Cart";
+  content: "Добавить в корзину";
   padding-top: 1.25em;
   padding-left: 1.25em;
   position: absolute;
